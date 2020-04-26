@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<link rel="icon" type="image/png" href="logo128.png">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=0.8">
+        <meta name="theme-color" content="#263238">
+        <title>Game of Ephesians</title>
+        <style>
+            body {
+                background-color: #263238;
+                color: #ffffff;
+            }
+            #sisalto {
+                font-family: 'Uncial Antiqua';
+                width: 400px;
+                margin: 10px auto 10px auto;
+                text-align: center;
+                overflow: auto;
+            }
+            #copyright {
+            	font-family: 'Ubuntu';
+            	font-size: 0.85em;
+                width: 400px;
+                margin: 10px auto 10px auto;
+                border-top: 1px solid white;
+                padding-top: 15px;
+                text-align: center;
+            }
+            #copyright a {
+            	color: #ff6f00;
+            }
+            #ylapalkki {
+                padding: 5px;
+                overflow: hidden;
+                margin-bottom: 5px;
+            }
+            #arvottu {
+                width: 50%;
+                float: left;
+                text-align: left;
+                padding-left: 15px;
+            }
+            #napit {
+                width: 35%;
+                float: right;
+                text-align: right;
+                padding-right: 15px;
+            }
+            #vihje {
+                background-color: #ff6f00;
+                color: #ffffff;
+                text-decoration: none;
+                padding: 2px 5px;
+                margin-right: 5px;
+                border-radius: 5px;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+            }
+            #asetusnappi {
+                background-color: #ff6f00;
+                color: #ffffff;
+                text-decoration: none;
+                padding: 2px 5px;
+                border-radius: 5px;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+            }
+            #asetukset {
+                background-color: #ffffff;
+                color: #ff6f00;
+                width: 90%;
+                margin: auto;
+                text-align: left;
+                display: none;
+            }
+            #asetuksetsis {
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size: 0.9em;
+                overflow: auto;
+            }
+            .valinnat {
+                margin: 15px auto;
+            }
+            #huom {
+                font-family: 'Ubuntu';
+                color: #263238;
+                text-align: center;
+                display: none;
+            }
+            #kentta {
+                margin: 10px 0px 10px 0px;
+            }
+            #syote {
+                width: 90%;
+                height: 100px;
+                font-family: 'Ubuntu';
+            }
+            .palaute {
+                padding: 10px;
+                border-top: 1px solid white;
+                overflow: auto;
+            }
+            .vasenpalsta {
+                width: 50%;
+                float: left;
+                text-align: left;
+            }
+            .oikeapalsta {
+                width: 50%;
+                float: left;
+                text-align: right;
+            }
+            .vasenjae {
+                width: 49%;
+                float: left;
+                text-align: left;
+                font-family: 'Ubuntu';
+                font-size: 0.85em;
+                margin-top: 5px;
+            }
+            .oikeajae {
+                width: 49%;
+                float: right;
+                text-align: left;
+                font-family: 'Ubuntu';
+                font-size: 0.85em;
+                margin-top: 5px;
+            }
+            .otsikko {
+                width: 100%;
+                text-align: left;
+                font-family: 'Ubuntu';
+                font-weight: bold;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=Uncial+Antiqua' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div id="sisalto">
+            <h2>GAME OF EPHESIANS</h2>
+            <div id="ylapalkki">
+                <div id="arvottu"></div>
+                <div id="napit">
+                    <a id="vihje" href="#" title="Paljasta jakeen ensimmäinen sana">VIHJE</a>
+                    <a id="asetusnappi" href="#" title="Asetukset">a</a>
+                </div>
+            </div>
+            <div id="asetukset">
+                <div id="asetuksetsis">
+                    <div class="valinnat">
+                        <input type="radio" name="pelitapa" id="ordered"><label for="ordered">Järjestyksessä alkaen:</label>
+                        <select id="luku"><option value="0">1</option></select>
+                        <select id="jae"><option value="0">1</option></select>
+                    </div>
+                    <div class="valinnat">
+                        <input type="radio" name="pelitapa" checked="checked" id="random"><label for="random" id="randomlabel">Arvo luvuista:</label>
+                    </div>
+                    <div class="valinnat" id="huom">
+                        Valitse vähintään yksi luku!
+                    </div>
+                </div>
+            </div>
+            <div id="kentta">
+                <textarea autofocus="autofocus" form="lomake" id="syote"></textarea>
+            </div>
+        </div>
+        <div id="copyright">
+            Raamatuntekstien tekijänoikeudet: <a href="http://www.raamattukansalle.fi/" title="Raamattu Kansalle" target="_blank">Raamattu Kansalle ry</a>
+        </div>
+        
+        <script type="text/javascript">
+            var jaetaulu = [];
+            var luku1 = "1 Paavali, Jumalan tahdosta Kristuksen Jeesuksen apostoli, Efesoksessa oleville pyhille ja uskoville Kristuksessa Jeesuksessa. 2 Armo teille ja rauha Jumalalta, meidän Isältämme, ja Herralta Jeesukselta Kristukselta! 3 Ylistetty olkoon meidän Herramme Jeesuksen Kristuksen Jumala ja Isä, joka on siunannut meitä taivaallisissa kaikella hengellisellä siunauksella Kristuksessa. 4 Jo ennen maailman perustamista hän valitsi meidät Kristuksessa olemaan pyhiä ja nuhteettomia hänen edessään. 5 Rakkaudessaan hän jo edeltä määräsi meidät yhteyteensä, omiksi lapsikseen, Jeesuksen Kristuksen kautta, oman hyvän tahtonsa mukaan, 6 armonsa kirkkauden ylistykseksi. Tämän armon hän on lahjoittanut meille siinä Rakastetussa, 7 jossa meillä on lunastus hänen verensä kautta, rikkomusten anteeksi saaminen hänen armonsa rikkauden mukaan. 8 Tätä armoa hän on antanut meille runsain määrin ja suonut meille kaikkea viisautta ja ymmärrystä. 9 Hän on ilmoittanut meille tahtonsa salaisuuden 10 siitä armotaloudesta, jonka hän oli suunnitellut ja nähnyt hyväksi toteuttaa aikojen täyttyessä: hän oli yhdistävä Kristuksessa yhdeksi kaiken, mitä on taivaissa ja maan päällä. 11 Kristuksessa me olemme myös saaneet perintöosan, niin kuin meistä oli ennalta määrätty hänen suunnitelmassaan, hänen, joka vaikuttaa kaiken oman tahtonsa ja päätöksensä mukaan, 12 että me, jotka olemme jo ennalta panneet toivomme Kristukseen, eläisimme Jumalan kirkkauden ylistykseksi. 13 Hänessä on teihinkin, sitten kun olitte kuulleet totuuden sanan, pelastuksenne evankeliumin, ja uskoneet sen, pantu sinetiksi luvattu Pyhä Henki, 14 joka on meidän perintömme vakuutena hänen omaisuutensa lunastamiseksi, hänen kirkkautensa ylistykseksi. 15 Sen vuoksi, saatuani kuulla uskostanne Herraan Jeesukseen ja rakkaudestanne kaikkia pyhiä kohtaan, 16 en lakkaa kiittämästä Jumalaa teistä muistaessani teitä rukouksissani. 17 Minä rukoilen, että meidän Herramme Jeesuksen Kristuksen Jumala, kirkkauden Isä, antaisi teille viisauden ja ilmestyksen Hengen hänen tuntemisessaan 18 ja valaisisi teidän sydämenne silmät, jotta tietäisitte, mikä on se toivo, johon hän on teidät kutsunut, miten suuri on hänen perintönsä kirkkaus hänen pyhissään 19 ja miten äärettömän suuri on hänen voimansa meitä kohtaan, jotka uskomme, hänen väkevän voimansa vaikutuksen mukaan. 20 Tällä voimallaan hän vaikutti Kristuksessa herättäessään hänet kuolleista ja asettaessaan hänet istumaan oikealle puolelleen taivaallisissa, 21 ylemmäksi kaikkea hallitusta ja valtaa, voimaa ja herruutta ja jokaista nimeä, joka mainitaan, ei vain tässä maailmanajassa vaan myös tulevassa. 22 Jumala on alistanut kaiken hänen jalkojensa alle ja asettanut hänet kaiken yläpuolelle, pääksi seurakunnalle, 23 joka on hänen ruumiinsa ja täyteytensä, hänen, joka kaiken kaikessa täyttää.";
+            var luku2 = "1 Jumala on eläviksi tehnyt teidät, jotka olitte kuolleet rikkomuksiinne ja synteihinne. 2 Niissä te ennen vaelsitte tämän maailman menon mukaan, ilmavallan hallitsijan tahdon mukaan, sen hengen, joka nyt vaikuttaa tottelemattomuuden lapsissa. 3 Heidän joukossaan mekin kaikki ennen elimme lihamme himoissa tyydyttäen lihan ja mielen haluja ja olimme luonnostamme vihan lapsia niin kuin muutkin. 4 Mutta Jumala, joka on laupeudesta rikas, on rakastanut meitä ja suuressa rakkaudessaan 5 tehnyt meidät, jotka olimme kuolleet rikkomustemme tähden, eläviksi yhdessä Kristuksen kanssa. Armosta te olette pelastettuja. 6 Jumala on herättänyt meidät yhdessä hänen kanssaan ja asettanut yhdessä hänen kanssaan istumaan taivaallisiin Kristuksessa Jeesuksessa, 7 osoittaakseen tulevina maailmanaikoina ylenpalttisen runsasta armoaan hyvyydessään meitä kohtaan Kristuksessa Jeesuksessa. 8 Armosta te olette pelastettuja uskon kautta, ette itsenne kautta - se on Jumalan lahja - 9 ette tekojen kautta, ettei kukaan voisi kerskailla. 10 Sillä me olemme hänen tekonsa, luodut Kristuksessa Jeesuksessa niitä hyviä töitä varten, jotka Jumala on ennalta valmistanut, vaeltaaksemme niissä. 11 Muistakaa sen vuoksi, että ennen te lihanne puolesta pakanat, ympärileikkaamattomat - näin teitä nimittävät ne, joita lihaan käsin tehdyn ympärileikkauksen mukaan sanotaan ympärileikatuiksi - 12 että te siihen aikaan olitte ilman Kristusta, olitte vailla Israelin kansalaisoikeutta, osattomia lupauksen liitoista, ilman toivoa ja ilman Jumalaa maailmassa. 13 Mutta nyt Kristuksessa Jeesuksessa olette te, jotka ennen olitte kaukana, päässeet lähelle Kristuksen veressä. 14 Hän on meidän rauhamme. Hän teki nuo molemmat ihmisryhmät yhdeksi ja purki niitä erottavan vihollisuuden muurin, 15 kun hän omassa lihassaan teki tehottomaksi käskyjen lain säädöksineen. Näin hän teki, jotta hän omassa itsessään loisi nuo kaksi yhdeksi uudeksi ihmiseksi ja niin tekisi rauhan 16 ja jotta hän yhdessä ruumiissa ristillä sovittaisi nuo molemmat Jumalan kanssa ja niin omassa itsessään tekisi lopun vihollisuudesta. 17 Hän tuli ja julisti rauhaa teille, jotka olitte kaukana, ja rauhaa niille, jotka olivat lähellä. 18 Hänen kauttaan on meillä molemmilla pääsy yhdessä ja samassa Hengessä Isän luo. 19 Te ette siis enää ole vieraita ettekä muukalaisia, vaan te olette samaa kansaa pyhien kanssa ja Jumalan perheväkeä, 20 apostolien ja profeettojen perustukselle rakennettuja, kulmakivenä itse Kristus Jeesus. 21 Hänessä koko rakennus liittyy yhteen ja kasvaa pyhäksi temppeliksi Herrassa. 22 Hänessä tekin rakennutte yhdessä muiden kanssa Jumalan asumukseksi Hengessä.";
+            var luku3 = "1 Tämän vuoksi minä, Paavali, joka olen teidän pakanoiden tähden Kristuksen Jeesuksen vanki, notkistan polveni. 2 Olette varmaan kuulleet siitä Jumalan armon taloudenhoidosta, joka on uskottu minulle teidän hyväksenne. 3 Minulle on ilmestyksessä annettu tiedoksi tämä salaisuus, niin kuin olen edellä lyhyesti kirjoittanut. 4 Sitä lukiessanne voitte huomata, kuinka perehtynyt minä olen Kristuksen salaisuuteen. 5 Tätä salaisuutta ei ole menneiden sukupolvien aikana annettu ihmisten tietoon, niin kuin se nyt on Hengessä ilmoitettu hänen pyhille apostoleilleen ja profeetoille: 6 myös pakanat ovat meidän kanssamme perillisiä, samaa ruumista ja osallisia lupaukseen Kristuksessa Jeesuksessa evankeliumin kautta. 7 Tämän evankeliumin palvelija minusta on tullut Jumalan armosta sen lahjan mukaan, joka hänen voimansa vaikutuksesta on minulle annettu. 8 Minulle, kaikista pyhistä vähäisimmälle, on annettu tämä armo: julistaa pakanoille evankeliumia Kristuksen tutkimattomasta rikkaudesta 9 ja ilmoittaa kaikille, mikä on sen salaisuuden taloudenhoito, joka ikiajoista asti on ollut kätkettynä Jumalassa, hänessä, joka on kaiken luonut. 10 Näin Jumalan moninainen viisaus tulee nyt seurakunnan kautta tunnetuksi taivaallisille hallituksille ja valloille 11 sen ikuisen suunnitelman mukaisesti, jonka hän oli tehnyt Kristuksessa Jeesuksessa, meidän Herrassamme. 12 Hänessä meillä on uskallus ja luottavainen pääsy Jumalan luo, uskon kautta häneen. 13 Siksi minä pyydän, ettette lannistuisi niiden ahdistusten vuoksi, joita saan teidän tähtenne kärsiä, sillä ne ovat teille kunniaksi. 14 Tämän vuoksi minä notkistan polveni Isän edessä, 15 hänen, josta kaikki isyys taivaissa ja maan päällä saa nimensä. 16 Rukoilen, että hän Henkensä kautta, suuren kirkkautensa mukaisesti, antaisi teidän sisäisen ihmisenne vahvistua voimassa, 17 niin että Kristus asuisi uskon kautta teidän sydämissänne. Rukoilen, että te, rakkauteen juurtuneina ja perustuneina, 18 voisitte yhdessä kaikkien pyhien kanssa käsittää, mitä on leveys, pituus, korkeus ja syvyys, 19 ja oppia tuntemaan Kristuksen rakkauden, joka on kaikkea tietoa ylempänä. Näin te tulette täyteen Jumalan kaikkea täyteyttä. 20 Hänelle, joka voi tehdä monin verroin enemmän kuin kaikki, mitä me anomme tai ymmärrämme, sen voiman mukaan, joka meissä vaikuttaa, 21 hänelle kunnia seurakunnassa ja Kristuksessa Jeesuksessa kautta kaikkien sukupolvien, aina ja iankaikkisesti! Aamen.";
+            var luku4 = "1 Minä, joka olen vankina Herran vuoksi, kehotan siis teitä vaeltamaan saamanne kutsumuksen arvoisesti, 2 kaikessa nöyrinä, lempeinä ja pitkämielisinä, kärsien toisianne rakkaudessa. 3 Pyrkikää rauhan yhdyssiteen avulla säilyttämään Hengen ykseys: 4 yksi ruumis ja yksi Henki, niin kuin teidät on kutsuttukin yhteen ja samaan toivoon, jonka te kutsumuksessanne saitte, 5 yksi Herra, yksi usko, yksi kaste; 6 yksi Jumala ja kaikkien Isä, joka on yli kaikkien, kaikkien kautta ja kaikissa. 7 Mutta itse kullekin meistä on annettu armo Kristuksen lahjan mitan mukaisesti. 8 Sen tähden sanotaan: ”Hän nousi korkeuteen, otti vankeja saaliikseen ja antoi lahjoja ihmisille.” 9 Mitä sitten merkitsee se, että hän nousi korkeuteen, ellei sitä, että hän oli laskeutunut myös alas, maan alimpiin paikkoihin? 10 Hän, joka laskeutui alas, nousi myös kaikkia taivaita ylemmäksi täyttääkseen kaiken. 11 Hän antoi toiset apostoleiksi, toiset profeetoiksi, toiset evankelistoiksi, toiset paimeniksi ja opettajiksi 12 tehdäkseen pyhät valmiiksi palvelutyöhön, Kristuksen ruumiin rakentamiseen, 13 kunnes me kaikki saavutamme ykseyden uskossa ja Jumalan Pojan tuntemisessa, kypsän miehuuden, Kristuksen täyteyden täysi-ikäisyyden mitan. 14 Silloin emme enää ole alaikäisiä, jotka ajelehtivat ja ovat kaikkien opintuulten heiteltävinä ihmisten arpapelissä ja eksytyksen kavalissa juonissa, 15 vaan noudatamme totuutta rakkaudessa ja kaikin tavoin kasvamme häneen, joka on pää, Kristus. 16 Hänessä koko ruumis, yhteen liittyneenä ja koossa pysyen jokaisen jänteensä avulla, kasvaa ja rakentuu rakkaudessa sen voiman mukaan, joka kullakin ruumiinosalla on. 17 Sanon siis tämän ja vakuutan Herrassa: älkää enää vaeltako niin kuin pakanat turhanpäiväisissä ajatuksissaan. 18 Heidän ymmärryksensä on pimentynyt, ja he ovat vieraantuneet Jumalan elämästä tietämättömyytensä ja sydämensä paatumuksen tähden. 19 Heidän tuntonsa on turtunut, he ovat antautuneet irstauteen ja ahneudessaan harjoittavat kaikenlaista saastaisuutta. 20 Mutta te ette ole sillä tavoin oppineet tuntemaan Kristusta, 21 jos yleensä olette hänestä kuulleet ja hänessä opetusta saaneet niin kuin totuus on Jeesuksessa: 22 teidän tulee hylätä vanha ihmisenne, jonka mukaan te ennen vaelsitte ja joka turmelee itsensä seuratessaan petollisia himoja, 23 uudistua hengeltänne ja mieleltänne 24 ja pukea yllenne uusi ihminen, joka on luotu Jumalan kuvan mukaisesti totuuden vanhurskauteen ja pyhyyteen. 25 Pankaa sen tähden pois valhe ja puhukaa lähimmäisenne kanssa totta, sillä me olemme toinen toisemme jäseniä. 26 Vihastukaa mutta älkää tehkö syntiä. Älköön aurinko laskeko vihanne yli. 27 Älkää antako tilaa Paholaiselle. 28 Joka on varastanut, älköön enää varastako, vaan pikemminkin tehköön työtä, ahkeroiden käsillään sitä, mikä on hyvää, niin että hänellä olisi antaa tarvitsevalle. 29 Älköön suustanne lähtekö mitään sopimatonta puhetta vaan ainoastaan sellaista, mikä on hyvää, tarpeellista ja rakentavaa, mieluista niille, jotka kuulevat. 30 Älkää tehkö murheelliseksi Jumalan Pyhää Henkeä, joka on annettu teille sinetiksi lunastuksen päivää varten. 31 Kaikki katkeruus, kiukku, viha, huuto ja herjaaminen, kaikenlainen pahuus olkoon pois teistä. 32 Olkaa toisianne kohtaan ystävällisiä ja hyväsydämisiä ja antakaa toisillenne anteeksi, niin kuin Jumalakin on Kristuksessa antanut teille anteeksi.";
+            var luku5 = "1 Olkaa siis Jumalan seuraajia niin kuin rakkaat lapset. 2 Vaeltakaa rakkaudessa, niin kuin Kristuskin rakasti meitä ja antoi itsensä meidän puolestamme lahjaksi ja suloisesti tuoksuvaksi uhriksi Jumalalle. 3 Mutta haureutta ja minkäänlaista saastaisuutta tai ahneutta älköön edes mainittako teidän keskuudessanne, eihän se sovi pyhille, 4 ei myöskään rivoutta, typerää puhetta tai ilveilyä, jotka ovat sopimattomia, vaan pikemminkin kiitosta. 5 Tehän tiedätte hyvin, ettei yhdelläkään haureellisella eikä saastaisella ole perintöosaa Kristuksen ja Jumalan valtakunnassa, ei myöskään ahneella, sillä hän on epäjumalanpalvelija. 6 Älkää antako kenenkään pettää itseänne tyhjillä puheilla, sillä niiden vuoksi Jumalan viha kohtaa tottelemattomuuden lapsia. 7 Älkää siis olko niihin osallisia heidän kanssaan. 8 Ennen te olitte pimeys, mutta nyt te olette valo Herrassa. Vaeltakaa valon lapsina, 9 sillä valon hedelmä ilmenee kaikenlaisena hyvyytenä, vanhurskautena ja totuutena. 10 Tutkikaa siis, mikä on Herralle mieleistä. 11 Älkää osallistuko pimeyden hedelmättömiin tekoihin, pikemminkin nuhdelkaa niistä. 12 On häpeällistä sanoakin, mitä tuollaiset ihmiset salassa tekevät. 13 Mutta kaikki tulee ilmi, kun valo sen paljastaa, 14 sillä kaikki, mikä tulee ilmi, on valoa. Sen vuoksi sanotaan: ”Herää, sinä joka nukut, ja nouse kuolleista, niin Kristus sinua valaisee!” 15 Katsokaa siis tarkoin, kuinka vaellatte: ei niin kuin tyhmät vaan niin kuin viisaat. 16 Käyttäkää aikanne oikein, sillä nämä päivät ovat pahoja. 17 Sen tähden älkää olko järjettömiä, vaan ymmärtäkää, mikä on Herran tahto. 18 Älkää juopuko viinistä, sillä siitä tulee irstas meno, vaan täyttykää Hengellä, 19 puhuen toisillenne psalmein, kiitosvirsin ja hengellisin lauluin. Laulakaa ja soittakaa sydämestänne Herralle 20 kiittäen aina kaikesta Jumalaa ja Isää Herramme Jeesuksen Kristuksen nimessä. 21 Ja olkaa toisillenne alamaisia Kristuksen pelossa. 22 Vaimot, olkaa omalle miehellenne alamaisia niin kuin Herralle, 23 sillä mies on vaimon pää, niin kuin myös Kristus on seurakunnan pää, oman ruumiinsa, seurakunnan, vapahtaja. 24 Niin kuin seurakunta on Kristukselle alamainen, niin olkoot vaimotkin miehelleen kaikessa alamaisia. 25 Miehet, rakastakaa vaimoanne niin kuin Kristuskin rakasti seurakuntaa ja antoi itsensä alttiiksi sen puolesta, 26 että hän sen pyhittäisi, puhdistaen sen vedellä pesten, sanan kautta, 27 ja asettaisi eteensä kirkastetun seurakunnan, vailla tahraa, ryppyä tai muuta sellaista, pyhän ja nuhteettoman. 28 Samoin jokaisen miehen tulee rakastaa omaa vaimoaan niin kuin omaa ruumistaan. Joka rakastaa vaimoaan, rakastaa itseään. 29 Eihän kukaan ole koskaan vihannut omaa lihaansa, vaan hän ravitsee ja vaalii sitä niin kuin Kristuskin seurakuntaa, 30 sillä me olemme hänen ruumiinsa jäseniä. 31 Sen tähden mies luopukoon isästään ja äidistään ja liittyköön vaimoonsa, ja ne kaksi tulevat yhdeksi lihaksi. 32 Tämä salaisuus on suuri; minä tarkoitan Kristusta ja seurakuntaa. 33 Mutta myös jokainen teistä rakastakoon vaimoaan niin kuin itseään, ja vaimon tulee kunnioittaa miestään.";
+            var luku6 = "1 Lapset, olkaa vanhemmillenne kuuliaisia Herrassa, sillä se on oikein. 2 ”Kunnioita isääsi ja äitiäsi” on ensimmäinen käsky, jota seuraa lupaus: 3 ”että menestyisit ja eläisit kauan maan päällä”. 4 Ja te isät, älkää kiihottako lapsianne vihaan, vaan kasvattakaa heitä Herran kurissa ja nuhteessa. 5 Orjat, olkaa kuuliaisia maallisille isännillenne vilpittömin sydämin niin kuin Kristukselle, peläten ja vavisten, 6 ei silmänpalvelijoina ihmisiä mielistellen vaan Kristuksen palvelijoina noudattaen Jumalan tahtoa kokosydämisesti. 7 Palvelkaa hyvillä mielin, niin kuin palvelisitte Herraa ettekä ihmisiä. 8 Tiedättehän, että mitä tahansa hyvää kukin tekee, sen hän saa Herralta takaisin, olipa orja tai vapaa. 9 Ja te isännät, tehkää samoin orjille ja jättäkää uhkailu, sillä te tiedätte, että heidän niin kuin teidänkin Herranne on taivaissa ja ettei hän katso henkilöön. 10 Lopuksi: vahvistukaa Herrassa ja hänen väkevässä voimassaan. 11 Pukekaa yllenne Jumalan koko taisteluvarustus voidaksenne kestää Paholaisen juonet. 12 Emmehän me taistele verta ja lihaa vastaan vaan hallituksia ja henkivaltoja vastaan, tässä pimeydessä hallitsevia maailmanvaltiaita ja taivaan avaruuden pahoja henkiolentoja vastaan. 13 Ottakaa sen tähden yllenne Jumalan koko taisteluvarustus, niin että voitte pahana päivänä tehdä vastarintaa ja kaiken suoritettuanne pysyä pystyssä. 14 Seisokaa siis kupeet totuuteen vyötettyinä, pukeutuneina vanhurskauden haarniskaan, 15 ja olkoon kenkinä jaloissanne alttius rauhan evankeliumia kohtaan. 16 Ottakaa kaikessa uskon kilpi, jolla voitte sammuttaa kaikki Pahan palavat nuolet. 17 Ottakaa myös pelastuksen kypärä ja Hengen miekka, joka on Jumalan sana. 18 Tehkää tämä kaikki alituisessa rukouksessa ja anomisessa rukoillen joka hetki Hengessä. Sen vuoksi valvokaa kaikessa kestävinä ja rukoilkaa kaikkien pyhien puolesta 19 ja minunkin puolestani, että minulle, kun avaan suuni, annettaisiin oikeat sanat julistaakseni rohkeasti evankeliumin salaisuutta, 20 jonka vuoksi olen lähettiläänä, kahleissa. Rukoilkaa, että puhuisin rohkeasti, niin kuin minun tulee puhua. 21 Jotta tekin tietäisitte, mitä minulle kuuluu ja mitä teen, siitä kaikesta tulee teille kertomaan Tykikos, rakas veli ja uskollinen palvelija Herrassa. 22 Lähetän hänet luoksenne juuri sitä varten, että saisitte tietää, mitä meille kuuluu, ja että hän lohduttaisi sydämiänne. 23 Rauha veljille ja rakkaus sekä usko Isältä Jumalalta ja Herralta Jeesukselta Kristukselta. 24 Armo olkoon kaikkien kanssa, jotka rakastavat meidän Herraamme Jeesusta Kristusta - katoamattomuudessa.";
+            taulukoiJakeet(luku1);
+            taulukoiJakeet(luku2);
+            taulukoiJakeet(luku3);
+            taulukoiJakeet(luku4);
+            taulukoiJakeet(luku5);
+            taulukoiJakeet(luku6);
+            
+            var current = [0, 0];
+            
+            var arvottavat = [];
+            var randomon = true;
+            
+            $(document).ready(function(){
+                    
+                    var luku = current[0] + 1;
+                    var jae = current[1] + 1;
+                    $('#arvottu').html("LUVUN " + luku + " JAE " + jae);    
+                    
+                    $('#luku').html("");
+                    for(var i=0; i<jaetaulu.length; i++) {
+                        var uusiOption = document.createElement("option");
+                        uusiOption.value = i;
+                        var teksti = document.createTextNode(i+1);
+                        uusiOption.appendChild(teksti);
+                        $('#luku').append(uusiOption);
+                    }
+                    $('#jae').html("");
+                    for(var i=0; i<jaetaulu[0].length; i++) {
+                        uusiOption = document.createElement("option");
+                        uusiOption.value = i;
+                        teksti = document.createTextNode(i+1);
+                        uusiOption.appendChild(teksti);
+                        $('#jae').append(uusiOption);
+                    }
+                    
+                    for(var i=jaetaulu.length; i>0; i--) {
+                        var uusiCheck = document.createElement("input");
+                        uusiCheck.type = "checkbox";
+                        uusiCheck.name = "luku";
+                        uusiCheck.checked = "checked";
+                        uusiCheck.value = i-1;
+                        var teksti = document.createTextNode(i);
+                        $(teksti).insertAfter('#randomlabel');
+                        $(uusiCheck).insertAfter('#randomlabel');
+                    }
+                    //$('input[name=luku]').prop("disabled", true);
+                    $('#luku').prop("disabled", true);
+                    $('#jae').prop("disabled", true);
+                    
+                    $('#luku').on("change", function(){
+                        var luku = $('#luku').val();
+                        $('#jae').html("");
+                        for(var i=0; i<jaetaulu[luku].length; i++) {
+                            uusiOption = document.createElement("option");
+                            uusiOption.value = i;
+                            teksti = document.createTextNode(i+1);
+                            uusiOption.appendChild(teksti);
+                            $('#jae').append(uusiOption);
+                        }
+                    });
+                    
+                    
+                    $('#ordered').click(function(){
+                        randomon = false;
+                        $('input[name=luku]').prop("disabled", true);
+                        $('#luku').prop("disabled", false);
+                        $('#jae').prop("disabled", false);
+                    });
+                    
+                    $('#random').click(function(){
+                        randomon = true;
+                        $('#luku').prop("disabled", true);
+                        $('#jae').prop("disabled", true);
+                        $('input[name=luku]').prop("disabled", false);
+                    });
+                    
+                    
+                    $('#syote').keypress(function(e){
+                        if(e.which == 13){
+                            e.preventDefault();
+                            tarkistaJae();
+                            $('#vihje').css("backgroundColor", "#ff6f00");
+                            $('#vihje').css("color", "#ffffff");
+                        }
+                    });
+                    
+                    $('#vihje').click(function(){
+                        $('#vihje').css("backgroundColor", "#ffffff");
+                        $('#vihje').css("color", "#ff6f00");
+                        annaVihje();
+                    });
+                    
+                    $('#asetusnappi').click(function(){
+                        var display = $('#asetukset').css("display");
+                        if(display == "none") {
+                            $('#asetusnappi').css("backgroundColor", "#ffffff");
+                            $('#asetusnappi').css("color", "#ff6f00");
+                            $('#asetukset').animate({
+                                height: "toggle"
+                            }, 400);
+                        }
+                        else {
+                            aloitaPeli();
+                        }
+                    });
+                    
+                    aloitaPeli();
+                    
+            });
+            
+            function aloitaPeli() {
+                $('#vihje').css("backgroundColor", "#ff6f00");
+                $('#vihje').css("color", "#ffffff");
+                $('#syote').val("");
+                
+                if(randomon) {
+                    arvottavat = [];
+                    
+                    $('input[name="luku"]:checked').each(function() {
+                           arvottavat.push(this.value);
+                    });
+                    if(typeof arvottavat[0] == "undefined") {
+                        $('#huom').show(400);
+                    }
+                    else {
+                        hideSettings();
+                        arvoJae();
+                    }
+                }
+                else {
+                    current[0] = parseInt($('#luku').val());
+                    current[1] = parseInt($('#jae').val());
+                    
+                    var luku = current[0] + 1;
+                    var jae = current[1] + 1;
+                    $('#arvottu').html("LUVUN " + luku + " JAE " + jae);
+                    
+                    hideSettings();
+                }
+            }
+            
+            function hideSettings() {
+               var display = $('#asetukset').css("display");
+            	if(display != "none") {
+		            $('#huom').hide(400);
+		            $('#asetusnappi').css("backgroundColor", "#ff6f00");
+		            $('#asetusnappi').css("color", "#ffffff");
+		            $('#asetukset').animate({
+		                height: "toggle"
+		            }, 400);
+		        }
+            }
+
+            function tarkistaJae() {
+                var syote = $('#syote').val();
+                syote = syote.trim();
+
+                if(syote != "") {
+                    if(syote == jaetaulu[current[0]][current[1]]) {
+                        palaute("");
+                    }
+                    else {
+                        palaute(syote);
+                    }
+                    $('#syote').val("");
+                    
+                    if(randomon)
+                        arvoJae();
+                    else
+                        seuraavaJae();
+                }
+            }
+            
+            function seuraavaJae() {
+                current[1] += 1;
+                
+                if(current[1] > jaetaulu[current[0]].length-1) {
+                    current[0] += 1;
+                    current[1] = 0;
+                    if(current[0] > jaetaulu.length-1)
+                        current[0] = 0;
+                }
+                
+                var luku = current[0] + 1;
+                var jae = current[1] + 1;
+                
+                $('#arvottu').html("LUVUN " + luku + " JAE " + jae);
+            }
+            
+            function arvoJae() {
+                var arvottu = [];
+                
+                var luvut = arvottavat.length-1;
+                var indeksi = Math.floor(Math.random() * (luvut - 0 + 1)) + 0;
+                arvottu[0] = parseInt(arvottavat[indeksi]);
+                var jakeet = jaetaulu[arvottu[0]].length-1;
+                arvottu[1] = Math.floor(Math.random() * (jakeet - 0 + 1)) + 0;
+
+                var luku = arvottu[0] + 1;
+                var jae = arvottu[1] + 1;
+
+                $('#arvottu').html("LUVUN " + luku + " JAE " + jae);
+                
+                current = arvottu;
+            }
+
+            function palaute(syote) {
+                var luku = current[0] + 1;
+                var jae = current[1] + 1;
+                
+                var uusiDiv = document.createElement("div");
+                uusiDiv.className = "palaute";
+                uusiDiv.style.cssText = "display:none;";
+                
+                var sisaDiv = document.createElement("div");
+                sisaDiv.className = "vasenpalsta";
+                var kohta = document.createTextNode("LUKU " + luku + " JAE " + jae);
+                sisaDiv.appendChild(kohta);
+                uusiDiv.appendChild(sisaDiv);
+                
+                sisaDiv = document.createElement("div");
+                sisaDiv.className = "oikeapalsta";
+                if(syote == "") {
+                    var tulos = document.createTextNode("Oikein!");
+                    sisaDiv.appendChild(tulos);
+                    uusiDiv.appendChild(sisaDiv);
+                }
+                else {
+                    var tulos = document.createTextNode("Väärin!");
+                    sisaDiv.appendChild(tulos);
+                    uusiDiv.appendChild(sisaDiv);
+                    
+                    
+                    sisaDiv = document.createElement("div");
+                    sisaDiv.className = "vasenjae";
+                    
+                    var otsikko = document.createElement("div");
+                    otsikko.className = "otsikko";
+                    var oteksti = document.createTextNode("Vastauksesi:");
+                    otsikko.appendChild(oteksti);
+                    sisaDiv.appendChild(otsikko);
+                    
+                    var syotetty = document.createTextNode(syote);
+                    sisaDiv.appendChild(syotetty);
+                    uusiDiv.appendChild(sisaDiv);
+                    
+                    
+                    sisaDiv = document.createElement("div");
+                    sisaDiv.className = "oikeajae";
+                    
+                    otsikko = document.createElement("div");
+                    otsikko.className = "otsikko";
+                    oteksti = document.createTextNode("Oikea vastaus:");
+                    otsikko.appendChild(oteksti);
+                    sisaDiv.appendChild(otsikko);
+                    
+                    var oikeajae = document.createTextNode(jaetaulu[current[0]][current[1]]);
+                    sisaDiv.appendChild(oikeajae);
+                    uusiDiv.appendChild(sisaDiv);
+                }
+                
+                var currentDiv = document.getElementsByClassName("palaute");
+                if(currentDiv.length == 0)
+                    $(uusiDiv).appendTo("#sisalto").show(400);
+                else
+                    $(uusiDiv).insertBefore(currentDiv[0]).show(400);
+            }
+            
+            function annaVihje() {
+                var jae = jaetaulu[current[0]][current[1]];
+                var ekasana = jae.substring(0, jae.indexOf(" "));
+                $('#syote').val(ekasana);;
+            }
+
+            function taulukoiJakeet(luku) {
+                var i = 0;
+                var alku = 0;
+                var loppu = 0;
+                var taulu = [];
+
+                while(loppu != luku.length)
+                {
+                    alku = luku.indexOf(i+1);
+                    loppu = luku.indexOf(i+2);
+                    if(loppu == -1) {
+                        loppu = luku.length;
+                    }
+                    if(i<9) {
+                        taulu[i] = luku.substring(alku+1, loppu).trim();
+                    }
+                    else {
+                        taulu[i] = luku.substring(alku+2, loppu).trim();
+                    }
+                    i++;
+                }
+                jaetaulu.push(taulu);
+            }
+        </script>
+    </body>
+</html>
