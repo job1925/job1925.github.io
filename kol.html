@@ -2,139 +2,11 @@
 <html>
     <head>
     	<link rel="icon" type="image/png" href="logo128.png">
+    	<link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#263238">
         <title>Game of Colossians</title>
-        <style>
-            body {
-                background-color: #263238;
-                color: #ffffff;
-            }
-            #sisalto {
-                font-family: 'Uncial Antiqua';
-                width: 400px;
-                margin: 10px auto 10px auto;
-                text-align: center;
-                overflow: auto;
-            }
-            #copyright {
-            	font-family: 'Ubuntu';
-            	font-size: 0.85em;
-                width: 400px;
-                margin: 10px auto 10px auto;
-                border-top: 1px solid white;
-                padding-top: 15px;
-                text-align: center;
-            }
-            #copyright a {
-            	color: #ff6f00;
-            }
-            #ylapalkki {
-                padding: 5px;
-                overflow: hidden;
-                margin-bottom: 5px;
-            }
-            #arvottu {
-                width: 50%;
-                float: left;
-                text-align: left;
-                padding-left: 15px;
-            }
-            #napit {
-                width: 35%;
-                float: right;
-                text-align: right;
-                padding-right: 15px;
-            }
-            #vihje {
-                background-color: #ff6f00;
-                color: #ffffff;
-                text-decoration: none;
-                padding: 2px 5px;
-                margin-right: 5px;
-                border-radius: 5px;
-                -moz-border-radius: 5px;
-                -webkit-border-radius: 5px;
-            }
-            #asetusnappi {
-                background-color: #ff6f00;
-                color: #ffffff;
-                text-decoration: none;
-                padding: 2px 5px;
-                border-radius: 5px;
-                -moz-border-radius: 5px;
-                -webkit-border-radius: 5px;
-            }
-            #asetukset {
-                background-color: #ffffff;
-                color: #ff6f00;
-                width: 90%;
-                margin: auto;
-                text-align: left;
-                display: none;
-            }
-            #asetuksetsis {
-                padding-left: 10px;
-                padding-right: 10px;
-                font-size: 0.9em;
-                overflow: auto;
-            }
-            .valinnat {
-                margin: 15px auto;
-            }
-            #huom {
-                font-family: 'Ubuntu';
-                color: #263238;
-                text-align: center;
-                display: none;
-            }
-            #kentta {
-                margin: 10px 0px 10px 0px;
-            }
-            #syote {
-                width: 90%;
-                height: 100px;
-                font-family: 'Ubuntu';
-            }
-            .palaute {
-                padding: 10px;
-                border-top: 1px solid white;
-                overflow: auto;
-            }
-            .vasenpalsta {
-                width: 50%;
-                float: left;
-                text-align: left;
-            }
-            .oikeapalsta {
-                width: 50%;
-                float: left;
-                text-align: right;
-            }
-            .vasenjae {
-                width: 49%;
-                float: left;
-                text-align: left;
-                font-family: 'Ubuntu';
-                font-size: 0.85em;
-                margin-top: 5px;
-            }
-            .oikeajae {
-                width: 49%;
-                float: right;
-                text-align: left;
-                font-family: 'Ubuntu';
-                font-size: 0.85em;
-                margin-top: 5px;
-            }
-            .otsikko {
-                width: 100%;
-                text-align: left;
-                font-family: 'Ubuntu';
-                font-weight: bold;
-            }
-        </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Uncial+Antiqua' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
@@ -174,7 +46,7 @@
         
         <script type="text/javascript">
             var jaetaulu = [];
-            var luku1 = "1 Paavali, Jumalan tahdosta Kristuksen Jeesuksen apostoli, ja veli Timoteus 2 Kolossassa asuville pyhille ja uskollisille veljille Kristuksessa. Armo teille ja rauha Jumalalta, meidän Isältämme! 3 Me kiitämme aina Jumalaa, Herramme Jeesuksen Kristuksen Isää, kun rukoilemme teidän puolestanne. 4 Olemmehan saaneet kuulla teidän uskostanne Kristukseen Jeesukseen ja rakkaudesta, joka teillä on kaikkia pyhiä kohtaan 5 sen toivon perusteella, joka on talletettuna teille taivaissa. Tästä toivosta te olette kuulleet jo aiemmin siinä totuuden sanassa, evankeliumissa, 6 joka tuli teidän luoksenne. Samoin kuin koko maailmassa se on teidänkin keskuudessanne kantanut hedelmää ja kasvanut siitä päivästä lähtien, jona sen kuulitte ja opitte tuntemaan Jumalan armon totuudessa. 7 Sellaisena te opitte sen Epafraalta, rakkaalta työtoveriltamme, joka on uskollinen Kristuksen palvelija teidän hyväksenne. 8 Hän on myös kertonut meille teidän rakkaudestanne Hengessä. 9 Sen tähden emme mekään siitä päivästä lähtien, jolloin saimme tästä kuulla, ole lakanneet rukoilemasta teidän puolestanne ja anomasta, että tulisitte täyteen hänen tahtonsa tuntemista kaikessa hengellisessä viisaudessa ja ymmärryksessä. 10 Rukoilemme, että vaeltaisitte Herran arvon mukaisesti ja hänelle kaikessa mieliksi ja että kantaisitte hedelmää kaikissa hyvissä teoissa ja kasvaisitte Jumalan tuntemisessa. 11 Vahvistakoon hän teitä kirkkautensa väkevyyden mukaisesti kaikella voimalla olemaan kaikessa kestäviä ja pitkämielisiä. 12 Iloiten te silloin kiitätte Isää, joka on tehnyt teidät kelvollisiksi saamaan osuuden siitä perinnöstä, joka pyhillä on valkeudessa. 13 Jumala on pelastanut meidät pimeyden vallasta ja siirtänyt meidät rakkaan Poikansa valtakuntaan, 14 hänen, jossa meillä on lunastus, syntien anteeksi saaminen. 15 Hän on näkymättömän Jumalan kuva, koko luomakunnan esikoinen. 16 Hänessä luotiin kaikki, mitä on taivaissa ja maan päällä, näkyvät ja näkymättömät, olivatpa ne valtaistuimia tai herruuksia, hallituksia tai valtoja. Kaikki on luotu hänen kauttaan ja häneen. 17 Hän on ennen kaikkea muuta, ja hänessä kaikki pysyy voimassa. 18 Hän on ruumiin, seurakunnan, pää. Hän on alku, kuolleista nousseiden esikoinen, jotta hän olisi kaikessa ensimmäinen. 19 Jumala näki hyväksi, että kaikki täyteys asuisi hänessä, 20ja että hän sovittaisi Poikansa kautta itsensä kanssa kaiken maan päällä ja taivaissa ja näin tekisi rauhan hänen ristinsä veren kautta. 21 Teidätkin, jotka ennen olitte vieraantuneita ja mieleltänne hänen vihamiehiään pahoissa teoissanne, 22 hän on nyt sovittanut Poikansa lihan ruumiissa kuoleman kautta, asettaakseen teidät pyhinä, nuhteettomina ja moitteettomina eteensä. 23 Teidän on vain pysyttävä uskossa, siihen perustuneina ja siinä lujina, horjahtamatta pois sen evankeliumin toivosta, jonka olette kuulleet. Tämä evankeliumi on julistettu koko luomakunnassa taivaan alla, ja sen palvelija minusta, Paavalista, on tullut. 24 Nyt iloitsen kärsiessäni teidän hyväksenne, ja mitä vielä puuttuu Kristuksen ahdistuksista, sen minä täytän lihassani hänen ruumiinsa hyväksi, joka on seurakunta. 25 Sen palvelija minusta on tullut Jumalan taloudenhoidon mukaisesti, joka on uskottu minulle teitä varten, julistaakseni täydellisesti Jumalan sanan, 26 sen salaisuuden, joka on ollut kätkössä ikuisista ajoista ja polvesta polveen mutta joka nyt on ilmoitettu hänen pyhilleen. 27 Heille Jumala tahtoi antaa tiedoksi, miten valtava on pakanakansojen keskuudessa tämän salaisuuden kirkkaus: Kristus teissä, kirkkauden toivo. 28 Häntä me julistamme neuvoen ja opettaen jokaista ihmistä kaikella viisaudella, asettaaksemme esiin jokaisen ihmisen täydellisenä Kristuksessa. 29 Sitä varten minä näen vaivaa taistellen hänen vaikutuksensa mukaan, joka vaikuttaa minussa voimakkaasti.";
+            var luku1 = "1 Paavali, Jumalan tahdosta Kristuksen Jeesuksen apostoli, ja veli Timoteus 2 Kolossassa asuville pyhille ja uskollisille veljille Kristuksessa. Armo teille ja rauha Jumalalta, meidän Isältämme! 3 Me kiitämme aina Jumalaa, Herramme Jeesuksen Kristuksen Isää, kun rukoilemme teidän puolestanne. 4 Olemmehan saaneet kuulla teidän uskostanne Kristukseen Jeesukseen ja rakkaudesta, joka teillä on kaikkia pyhiä kohtaan 5 sen toivon perusteella, joka on talletettuna teille taivaissa. Tästä toivosta te olette kuulleet jo aiemmin siinä totuuden sanassa, evankeliumissa, 6 joka tuli teidän luoksenne. Samoin kuin koko maailmassa se on teidänkin keskuudessanne kantanut hedelmää ja kasvanut siitä päivästä lähtien, jona sen kuulitte ja opitte tuntemaan Jumalan armon totuudessa. 7 Sellaisena te opitte sen Epafraalta, rakkaalta työtoveriltamme, joka on uskollinen Kristuksen palvelija teidän hyväksenne. 8 Hän on myös kertonut meille teidän rakkaudestanne Hengessä. 9 Sen tähden emme mekään siitä päivästä lähtien, jolloin saimme tästä kuulla, ole lakanneet rukoilemasta teidän puolestanne ja anomasta, että tulisitte täyteen hänen tahtonsa tuntemista kaikessa hengellisessä viisaudessa ja ymmärryksessä. 10 Rukoilemme, että vaeltaisitte Herran arvon mukaisesti ja hänelle kaikessa mieliksi ja että kantaisitte hedelmää kaikissa hyvissä teoissa ja kasvaisitte Jumalan tuntemisessa. 11 Vahvistakoon hän teitä kirkkautensa väkevyyden mukaisesti kaikella voimalla olemaan kaikessa kestäviä ja pitkämielisiä. 12 Iloiten te silloin kiitätte Isää, joka on tehnyt teidät kelvollisiksi saamaan osuuden siitä perinnöstä, joka pyhillä on valkeudessa. 13 Jumala on pelastanut meidät pimeyden vallasta ja siirtänyt meidät rakkaan Poikansa valtakuntaan, 14 hänen, jossa meillä on lunastus, syntien anteeksi saaminen. 15 Hän on näkymättömän Jumalan kuva, koko luomakunnan esikoinen. 16 Hänessä luotiin kaikki, mitä on taivaissa ja maan päällä, näkyvät ja näkymättömät, olivatpa ne valtaistuimia tai herruuksia, hallituksia tai valtoja. Kaikki on luotu hänen kauttaan ja häneen. 17 Hän on ennen kaikkea muuta, ja hänessä kaikki pysyy voimassa. 18 Hän on ruumiin, seurakunnan, pää. Hän on alku, kuolleista nousseiden esikoinen, jotta hän olisi kaikessa ensimmäinen. 19 Jumala näki hyväksi, että kaikki täyteys asuisi hänessä, 20 ja että hän sovittaisi Poikansa kautta itsensä kanssa kaiken maan päällä ja taivaissa ja näin tekisi rauhan hänen ristinsä veren kautta. 21 Teidätkin, jotka ennen olitte vieraantuneita ja mieleltänne hänen vihamiehiään pahoissa teoissanne, 22 hän on nyt sovittanut Poikansa lihan ruumiissa kuoleman kautta, asettaakseen teidät pyhinä, nuhteettomina ja moitteettomina eteensä. 23 Teidän on vain pysyttävä uskossa, siihen perustuneina ja siinä lujina, horjahtamatta pois sen evankeliumin toivosta, jonka olette kuulleet. Tämä evankeliumi on julistettu koko luomakunnassa taivaan alla, ja sen palvelija minusta, Paavalista, on tullut. 24 Nyt iloitsen kärsiessäni teidän hyväksenne, ja mitä vielä puuttuu Kristuksen ahdistuksista, sen minä täytän lihassani hänen ruumiinsa hyväksi, joka on seurakunta. 25 Sen palvelija minusta on tullut Jumalan taloudenhoidon mukaisesti, joka on uskottu minulle teitä varten, julistaakseni täydellisesti Jumalan sanan, 26 sen salaisuuden, joka on ollut kätkössä ikuisista ajoista ja polvesta polveen mutta joka nyt on ilmoitettu hänen pyhilleen. 27 Heille Jumala tahtoi antaa tiedoksi, miten valtava on pakanakansojen keskuudessa tämän salaisuuden kirkkaus: Kristus teissä, kirkkauden toivo. 28 Häntä me julistamme neuvoen ja opettaen jokaista ihmistä kaikella viisaudella, asettaaksemme esiin jokaisen ihmisen täydellisenä Kristuksessa. 29 Sitä varten minä näen vaivaa taistellen hänen vaikutuksensa mukaan, joka vaikuttaa minussa voimakkaasti.";
             var luku2 = "1 Tahdon teidän tietävän, kuinka suuri taistelu minulla on teidän tähtenne ja laodikealaisten ja kaikkien niiden tähden, jotka eivät ole nähneet minun kasvojani, 2 että he, sydämet yhteen liittyneinä rakkaudessa, saisivat rohkeuden omistaa täysin varman ymmärtämisen koko rikkauden ja pääsisivät tuntemaan Jumalan salaisuuden, Kristuksen. 3 Hänessä ovat kaikki viisauden ja tiedon aarteet kätkettyinä. 4 Sanon tämän, ettei kukaan pettäisi teitä suostuttelevalla puheella. 5 Vaikka ruumiillisesti olenkin poissa, olen kuitenkin hengessä teidän kanssanne ja iloitsen nähdessäni järjestyksen, joka keskuudessanne vallitsee, ja lujan uskonne Kristukseen.6 Niin kuin siis olette ottaneet vastaan Kristuksen Jeesuksen, Herran, niin vaeltakaa hänessä. 7 Juurtukaa häneen, rakentukaa hänessä ja vahvistukaa uskossa, niin kuin teille on opetettu. Olkoon kiitoksenne ylitsevuotava. 8 Varokaa, ettei kukaan saa teitä saaliikseen järkeisopilla ja tyhjällä petoksella, jotka perustuvat ihmisten perinnäissääntöihin ja maailman alkeisvoimiin eivätkä Kristukseen. 9 Hänessä asuu jumaluuden koko täyteys ruumiillisesti, 10 ja teillä on tämä täyteys hänessä , joka on kaiken hallituksen ja vallan pää. 11 Hänessä teidät on myös ympärileikattu, ei käsin tehdyllä ympärileikkauksella vaan lihan ruumiin riisumisella, Kristuksen ympärileikkauksella. 12 Teidät on haudattu hänen kanssaan kasteessa, ja siinä teidät on myös herätetty hänen kanssaan uskon kautta. Tämän uskon vaikuttaa Jumala, joka herätti hänet kuolleista. 13 Teidät, jotka olitte kuolleita rikkomuksissanne ja lihanne ympärileikkaamattomuudessa, Jumala teki eläviksi yhdessä Kristuksen kanssa. Hän antoi meille anteeksi kaikki rikkomukset 14 ja pyyhki pois sen kirjoituksen säädöksineen, joka oli meitä vastaan ja oli vastustajamme. Sen hän otti pois tieltä ja naulitsi ristiin. 15 Hän riisui aseista hallitukset ja vallat ja saattoi ne julkisen häpeän alaisiksi, kun hän sai niistä Kristuksessa riemuvoiton. 16 Älköön siis kukaan tuomitko teitä syömisen ja juomisen tai jonkin juhlan, uudenkuun tai sapatin vuoksi. 17 Nehän ovat vain varjo siitä, mikä oli tulossa, mutta itse todellisuus on Kristuksessa . 18 Älköön teidän voittopalkintoanne riistäkö kukaan, joka on mieltynyt nöyryyteen ja enkelien palvontaan, on näkyjensä vallassa ja lihallisen mielensä turhaan paisuttama 19 eikä pitäydy Kristukseen, joka on pää ja josta koko ruumis, nivelten ja jänteiden avulla koossa pysyen, kasvaa Jumalan antamaa kasvua. 20 Jos te olette Kristuksen kanssa kuolleet maailman alkeisvoimille, miksi te, ikään kuin eläisitte maailmassa, annatte määrätä itsellenne sääntöjä, kuten 21 ”älä tartu, älä maista, älä kosketa”? 22 Nehän ovat ihmisten käskyjä ja oppeja, ja ne koskevat sellaista, mikä on tarkoitettu käytössä häviämään. 23 Niillä tosin on viisauden maine itse valitun jumalanpalveluksen, nöyryyden ja ruumiin säälimättömän kohtelun vuoksi, mutta mitään arvoa niillä ei ole, ja niitä noudatetaan vain lihan tyydyttämiseksi.";
             var luku3 = "1 Jos siis teidät on herätetty yhdessä Kristuksen kanssa, niin etsikää sitä, mikä on ylhäällä, missä Kristus istuu Jumalan oikealla puolella. 2 Kiinnittäkää mielenne siihen, mikä on ylhäällä, älkää siihen, mikä on maan päällä. 3 Tehän olette kuolleet, ja teidän elämänne on Kristuksen kanssa kätkettynä Jumalassa. 4 Kun Kristus, teidän elämänne, ilmestyy, silloin tekin ilmestytte hänen kanssaan kirkkaudessa. 5 Kuolettakaa siis maalliset jäsenenne: haureus, saastaisuus, kiihko, paha himo ja ahneus, joka on epäjumalanpalvelusta. 6 Niiden vuoksi Jumalan viha kohtaa tottelemattomuuden lapsia, 7 ja niissä tekin ennen vaelsitte, kun niissä elitte. 8 Pankaa nyt tekin pois tämä kaikki: viha, kiivastuminen, pahuus, pilkka ja häpeämätön puhe suustanne. 9 Älkää puhuko valhetta toisistanne. Olettehan riisuneet pois vanhan ihmisen tekoineen 10 ja pukeutuneet uuteen, joka uudistuu tietoon, Luojansa kuvan mukaan. 11 Tässä ei ole kreikkalaista eikä juutalaista, ei ympärileikkausta eikä ympärileikkaamattomuutta, ei barbaaria, skyyttalaista, orjaa eikä vapaata, vaan Kristus on kaikki ja kaikissa. 12 Pukeutukaa siis te, jotka olette Jumalan valittuja, pyhiä ja rakkaita, sydämelliseen armahtavaisuuteen, ystävällisyyteen, nöyryyteen, lempeyteen ja pitkämielisyyteen. 13 Kärsikää toinen toistanne ja antakaa toisillenne anteeksi, jos jollakulla on moitetta toista vastaan. Niin kuin Herra on antanut teille anteeksi, niin antakaa tekin. 14 Mutta kaiken tämän lisäksi pukeutukaa rakkauteen, joka on täydellisyyden side. 15 Vallitkoon teidän sydämissänne Kristuksen rauha, johon teidät myös on yhdessä ruumiissa kutsuttu, ja olkaa kiitollisia! 16 Runsaasti asukoon teissä Kristuksen sana. Opettakaa ja neuvokaa toinen toistanne kaikella viisaudella, psalmein, kiitosvirsin ja hengellisin lauluin, laulaen kiitollisina sydämissänne Jumalalle. 17 Mitä teettekin, sanoin tai teoin, tehkää kaikki Herran Jeesuksen nimessä, kiittäen Isää Jumalaa hänen kauttaan. 18 Vaimot, olkaa miehellenne alamaisia, niin kuin sopii Herrassa. 19 Miehet, rakastakaa vaimoanne älkääkä olko häntä kohtaan katkeria. 20 Lapset, olkaa kaikessa kuuliaisia vanhemmillenne, sillä se on Herralle mieleen. 21 Isät, älkää katkeroittako lapsianne, etteivät he masentuisi. 22 Orjat, olkaa maallisille isännillenne kaikessa kuuliaisia, ei silmänpalvelijoina, ihmisiä mielistellen, vaan vilpittömin sydämin, Herraa peläten. 23 Mitä teettekin, tehkää se sydämestänne niin kuin Herralle eikä ihmisille. 24 Tehän tiedätte, että saatte Herralta palkaksi perinnön. Te palvelette Herraa Kristusta. 25 Joka tekee väärin, saa takaisin, mitä on väärin tehnyt, eikä henkilöön katsota.";
             var luku4 = "1 Isännät, kohdelkaa orjianne niin kuin oikeus ja kohtuus vaatii. Tiedättehän, että teilläkin on Herra taivaassa. 2 Olkaa kestäviä rukouksessa ja siinä kiittäen valvokaa. 3 Rukoilkaa samalla meidänkin puolestamme, että Jumala avaisi meille sanan oven puhuaksemme Kristuksen salaisuutta, jonka tähden olen kahleissakin, 4 ja että toisin sen julki ja puhuisin niin kuin minun pitää puhua. 5 Käyttäytykää viisaasti ulkopuolisia kohtaan ja ottakaa huomioon oikea hetki. 6 Olkoon puheenne aina suloista, suolalla maustettua, ja tietäkää, kuinka teidän tulee itse kullekin vastata. 7 Kaikesta, mikä koskee minua, teille antaa tiedon Tykikos, rakas veli, uskollinen palvelija ja työtoverini Herrassa. 8 Lähetän hänet luoksenne juuri sitä varten, että saisitte tietää, mitä meille kuuluu, ja että hän rohkaisisi sydämiänne. 9 Hänen kanssaan lähetän Onesimoksen, uskollisen ja rakkaan veljen, joka on teikäläisiä. He kertovat teille kaiken, mitä tänne kuuluu. 10 Teitä tervehtii Aristarkos, vankitoverini, samoin Markus, Barnabaksen serkku, josta olette saaneet ohjeita. Jos hän tulee luoksenne, ottakaa hänet vastaan. 11 Myös Jeesus, jota sanotaan Justukseksi, tervehtii teitä. Ympärileikatuista nämä ovat ainoat työtoverini Jumalan valtakunnan työssä, ja he ovat olleet minulle lohdutukseksi. 12 Teikäläinen Epafras, Kristuksen Jeesuksen palvelija, tervehtii teitä. Hän taistelee aina rukouksissaan teidän puolestanne, että pysyisitte täydellisinä ja täysin varmoina kaikessa, mikä on Jumalan tahto. 13 Minä todistan, että hän näkee paljon vaivaa teidän hyväksenne ja niiden, jotka ovat Laodikeassa ja Hierapoliissa. 14 Teitä tervehtii Luukas, rakas lääkäri, samoin Deemas. 15 Tervehtikää Laodikeassa olevia veljiä ja Nymfaa sekä hänen kodissaan kokoontuvaa seurakuntaa. 16 Kun tämä kirje on luettu teidän luonanne, huolehtikaa siitä, että se luetaan myös Laodikean seurakunnassa ja että te puolestanne luette Laodikeasta tulevan kirjeen. 17 Sanokaa Arkippokselle: ”Katso, että suoritat täysin sen palvelutehtävän, jonka olet Herralta saanut.” 18 Omakätinen tervehdys minulta, Paavalilta. Muistakaa minun kahleitani. Armo olkoon teidän kanssanne.";
