@@ -166,6 +166,17 @@
 
                 $('#jae').html(jaetaulu[arvottu[0]][arvottu[1]]);
                 
+                $('#jae').css({'width':'70%', 'height':'100%'});
+                var contentWidth = $('#jae').width();
+                var contentHeight = $('#jae').height();
+                $('#jae').css({'width':contentWidth, 'height':'0px', 'opacity':'0'});
+                
+                $('#jae').animate({
+                    'width':contentWidth+'px',
+                    'height':contentHeight+'px',
+                    'opacity':1,
+                });
+                
                 current = arvottu;
             }
 
