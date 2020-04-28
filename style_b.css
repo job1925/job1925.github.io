@@ -31,33 +31,17 @@ h1 a {
     margin-bottom: 5px;
     font-size: 18px;
 }
-#ypalkkivasen {
+#ylapalkkivasen {
     width: 50%;
     float: left;
     text-align: left;
     padding-left: 15px;
-}
-#arvottu {
-    vertical-align: middle;
-    display: inline-flex;
 }
 #ypalkkioikea {
     width: 35%;
     float: right;
     text-align: right;
     padding-right: 15px;
-}
-#vihje {
-    background-color: #ff6f00;
-    color: #ffffff;
-    text-decoration: none;
-    padding: 2px 5px;
-    vertical-align: middle;
-    display: inline-flex;
-    margin-right: 5px;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
 }
 #asetusnappi {
     background-color: #ff6f00;
@@ -79,8 +63,8 @@ h1 a {
     display: none;
 }
 #asetuksetsis {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: 0.9em;
     overflow: auto;
 }
@@ -93,48 +77,57 @@ h1 a {
     text-align: center;
     display: none;
 }
-#kentta {
-    margin: 10px 0px 20px 0px;
+#jae_arvaus {
+    padding: 5px;
+    overflow: hidden;
+    margin: 15px 0px;
+}
+#jae {
+    width: 70%;
+    float: left;
+    text-align: left;
+    padding-left: 15px;
+    font-family: 'Ubuntu';
+    font-size: 0.85em;
+}
+#arvaus {
+    width: 15%;
+    float: right;
+    text-align: right;
+    padding-right: 15px;
 }
 #syote {
-    width: 90%;
-    height: 100px;
-    font-family: 'Ubuntu';
+    width: 100%;
+    box-sizing : border-box;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
 }
 .palaute {
     padding: 10px;
     border-top: 1px solid white;
     overflow: auto;
 }
-.vasenpalsta {
-    width: 50%;
-    float: left;
-    text-align: left;
+.tulos {
+    width: 100%;
+    text-align: center;
 }
-.oikeapalsta {
-    width: 50%;
-    float: left;
-    text-align: right;
-}
-.vasenjae {
+.kysyttyjae {
     width: 49%;
     float: left;
     text-align: left;
     font-family: 'Ubuntu';
     font-size: 0.85em;
-    margin-top: 5px;
 }
-.oikeajae {
+.syotejavastaus {
     width: 49%;
     float: right;
-    text-align: left;
+    text-align: right;
     font-family: 'Ubuntu';
     font-size: 0.85em;
-    margin-top: 5px;
 }
 .otsikko {
     width: 100%;
-    text-align: left;
     font-family: 'Ubuntu';
     font-weight: bold;
+    margin-top: 10px;
 }
