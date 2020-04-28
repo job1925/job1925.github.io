@@ -247,11 +247,11 @@
             function arvoJae() {
                 var arvottu = [];
                 
-                var luvut = arvottavat.length-1;
-                var indeksi = Math.floor(Math.random() * (luvut - 0 + 1)) + 0;
+                var luvut = arvottavat.length;
+                var indeksi = Math.floor(Math.random() * luvut);
                 arvottu[0] = parseInt(arvottavat[indeksi]);
-                var jakeet = jaetaulu[arvottu[0]].length-1;
-                arvottu[1] = Math.floor(Math.random() * (jakeet - 0 + 1)) + 0;
+                var jakeet = jaetaulu[arvottu[0]].length;
+                arvottu[1] = Math.floor(Math.random() * jakeet);
 
                 var luku = arvottu[0] + 1;
                 var jae = arvottu[1] + 1;
