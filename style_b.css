@@ -21,11 +21,56 @@ body {
 #copyright a {
     color: #ff6f00;
 }
-#jae_arvaus {
+#ylapalkki {
     padding: 5px;
     overflow: hidden;
     margin-bottom: 5px;
     font-size: 18px;
+}
+#ypalkkioikea {
+    width: 35%;
+    float: right;
+    text-align: right;
+    padding-right: 15px;
+}
+#asetusnappi {
+    background-color: #ff6f00;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 2px 5px;
+    vertical-align: middle;
+    display: inline-flex;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+#asetukset {
+    background-color: #ffffff;
+    color: #ff6f00;
+    width: 90%;
+    margin: auto;
+    text-align: left;
+    display: none;
+}
+#asetuksetsis {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 0.9em;
+    overflow: auto;
+}
+.valinnat {
+    margin: 15px auto;
+}
+#huom {
+    font-family: 'Ubuntu';
+    color: #263238;
+    text-align: center;
+    display: none;
+}
+#jae_arvaus {
+    padding: 5px;
+    overflow: hidden;
+    margin-bottom: 5px;
 }
 #jae {
     width: 50%;
@@ -40,7 +85,10 @@ body {
     padding-right: 15px;
 }
 #syote {
-    display: inline-flex;
+    width: 100%;
+    box-sizing : border-box;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
 }
 .palaute {
     padding: 10px;
