@@ -14,8 +14,13 @@
     </head>
     <body>
         <div id="sisalto">
-            <h1>Game of Philippians</h1>
+            <h1>
+                <a href="fil.html">Game of Philippians</a>
+            </h1>
             <div id="ylapalkki">
+                <div id="ylapalkkivasen">
+                    SIJOITA JAE
+                </div>
                 <div id="ypalkkioikea">
                     <a id="asetusnappi" href="#" title="Asetukset"><i class="material-icons">tune</i></a>
                 </div>
@@ -128,14 +133,17 @@
 
             function tarkistaJae() {
                 var syote = $('#syote').val();
-                syote = syote.trim();
+                
+                var luku = parseInt(syote.substring(0,1));
+                var jae = parseInt(syote.substring(1));
+                var vastaus = [luku, jae];
 
                 if(syote != "") {
-                    if(syote == jaetaulu[current[0]][current[1]]) {
+                    if(vastaus[0]-1 == current[0] && vastaus[1]-1 == current[1]) {
                         palaute("");
                     }
                     else {
-                        palaute(syote);
+                        palaute(vastaus);
                     }
                     $('#syote').val("");
                     
@@ -146,37 +154,25 @@
             function arvoJae() {
                 var arvottu = [];
                 
-                var luvut = arvottavat.length-1;
-                var indeksi = Math.floor(Math.random() * (luvut - 0 + 1)) + 0;
+                var luvut = arvottavat.length;
+                var indeksi = Math.floor(Math.random() * luvut);
                 arvottu[0] = parseInt(arvottavat[indeksi]);
-                var jakeet = jaetaulu[arvottu[0]].length-1;
-                arvottu[1] = Math.floor(Math.random() * (jakeet - 0 + 1)) + 0;
+                var jakeet = jaetaulu[arvottu[0]].length;
+                arvottu[1] = Math.floor(Math.random() * jakeet);
 
-                var luku = arvottu[0] + 1;
-                var jae = arvottu[1] + 1;
-
-                $('#arvottu').html("LUVUN " + luku + " JAE " + jae);
+                $('#jae').html(jaetaulu[arvottu[0]][arvottu[1]]);
                 
                 current = arvottu;
             }
 
-            function palaute(syote) {
-                var luku = current[0] + 1;
-                var jae = current[1] + 1;
-                
+            function palaute(vastaus) {
                 var uusiDiv = document.createElement("div");
                 uusiDiv.className = "palaute";
                 uusiDiv.style.cssText = "display:none;";
                 
                 var sisaDiv = document.createElement("div");
-                sisaDiv.className = "vasenpalsta";
-                var kohta = document.createTextNode("LUKU " + luku + " JAE " + jae);
-                sisaDiv.appendChild(kohta);
-                uusiDiv.appendChild(sisaDiv);
-                
-                sisaDiv = document.createElement("div");
-                sisaDiv.className = "oikeapalsta";
-                if(syote == "") {
+                sisaDiv.className = "tulos";
+                if(vastaus == "") {
                     var tulos = document.createTextNode("Oikein!");
                     sisaDiv.appendChild(tulos);
                     uusiDiv.appendChild(sisaDiv);
@@ -188,30 +184,42 @@
                     
                     
                     sisaDiv = document.createElement("div");
-                    sisaDiv.className = "vasenjae";
-                    
+                    sisaDiv.className = "kysyttyjae";
                     var otsikko = document.createElement("div");
                     otsikko.className = "otsikko";
-                    var oteksti = document.createTextNode("Vastauksesi:");
+                    var oteksti = document.createTextNode("Kysytty jae:");
                     otsikko.appendChild(oteksti);
                     sisaDiv.appendChild(otsikko);
-                    
-                    var syotetty = document.createTextNode(syote);
-                    sisaDiv.appendChild(syotetty);
+                    var kysytty = document.createTextNode(jaetaulu[current[0]][current[1]]);
+                    sisaDiv.appendChild(kysytty);
                     uusiDiv.appendChild(sisaDiv);
                     
                     
                     sisaDiv = document.createElement("div");
-                    sisaDiv.className = "oikeajae";
+                    sisaDiv.className = "syotejavastaus";
+                    
+                    otsikko = document.createElement("div");
+                    otsikko.className = "otsikko";
+                    oteksti = document.createTextNode("Vastauksesi:");
+                    otsikko.appendChild(oteksti);
+                    sisaDiv.appendChild(otsikko);
+                    var lukujajae = document.createElement("div");
+                    lukujajae.className = "lukujajae";
+                    var vastaus = document.createTextNode("Luku " + vastaus[0] + " jae " + vastaus[1]);
+                    lukujajae.appendChild(vastaus);
+                    sisaDiv.appendChild(lukujajae);
+                    uusiDiv.appendChild(sisaDiv);
                     
                     otsikko = document.createElement("div");
                     otsikko.className = "otsikko";
                     oteksti = document.createTextNode("Oikea vastaus:");
                     otsikko.appendChild(oteksti);
                     sisaDiv.appendChild(otsikko);
-                    
-                    var oikeajae = document.createTextNode(jaetaulu[current[0]][current[1]]);
-                    sisaDiv.appendChild(oikeajae);
+                    var lukujajae = document.createElement("div");
+                    lukujajae.className = "lukujajae";
+                    vastaus = document.createTextNode("Luku " + (current[0] + 1) + " jae " + (current[1] + 1));
+                    lukujajae.appendChild(vastaus);
+                    sisaDiv.appendChild(lukujajae);
                     uusiDiv.appendChild(sisaDiv);
                 }
                 

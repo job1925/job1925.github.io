@@ -2,10 +2,14 @@ body {
     background-color: #263238;
     color: #ffffff;
 }
+h1 a {
+    color: #ffffff;
+    text-decoration: none;
+}
 #sisalto {
     font-family: 'Uncial Antiqua';
     width: 400px;
-    margin: 10px auto 10px auto;
+    margin: 0px auto;
     text-align: center;
     overflow: auto;
 }
@@ -26,7 +30,7 @@ body {
     font-family: 'Ubuntu';
     font-size: 0.85em;
     width: 400px;
-    margin: 10px auto 10px auto;
+    margin: 0px auto 10px auto;
     border-top: 1px solid white;
     padding-top: 15px;
     text-align: center;
@@ -103,7 +107,7 @@ body {
     display: none;
 }
 #kentta {
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 20px 0px;
 }
 #syote {
     width: 90%;

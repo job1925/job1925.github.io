@@ -2,7 +2,7 @@
 <html>
     <head>
     	<link rel="icon" type="image/png" href="logo128.png">
-    	<link rel="stylesheet" type="text/css" href="style.css">
+    	<link rel="stylesheet" type="text/css" href="style_b.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#263238">
@@ -15,34 +15,32 @@
     <body>
         <div id="sisalto">
             <h1>
-                <a href="ef_b.html">Game of Ephesians</a>
+                <a href="ef.html">Game of Ephesians</a>
             </h1>
             <div id="ylapalkki">
-                <div id="ypalkkivasen">
-                    <div id="arvottu"></div>
+                <div id="ylapalkkivasen">
+                    SIJOITA JAE
                 </div>
                 <div id="ypalkkioikea">
-                    <a id="vihje" href="#" title="Paljasta jakeen ensimmäinen sana">VIHJE</a>
                     <a id="asetusnappi" href="#" title="Asetukset"><i class="material-icons">tune</i></a>
                 </div>
             </div>
             <div id="asetukset">
                 <div id="asetuksetsis">
-                    <div class="valinnat">
-                        <input type="radio" name="pelitapa" id="ordered"><label for="ordered">Järjestyksessä alkaen:</label>
-                        <select id="luku"><option value="0">1</option></select>
-                        <select id="jae"><option value="0">1</option></select>
-                    </div>
-                    <div class="valinnat">
-                        <input type="radio" name="pelitapa" checked="checked" id="random"><label for="random" id="randomlabel">Arvo luvuista:</label>
+                    <div class="valinnat"> 
+                    <label for="random" id="randomlabel">Arvo luvuista:</label>
                     </div>
                     <div class="valinnat" id="huom">
                         Valitse vähintään yksi luku!
                     </div>
                 </div>
             </div>
-            <div id="kentta">
-                <textarea autofocus="autofocus" form="lomake" id="syote"></textarea>
+            <div id="jae_arvaus">
+                <div id="jae">
+                </div>
+                <div id="arvaus">
+                    <input type="number" autofocus="autofocus" id="syote"></input>
+                </div>
             </div>
         </div>
         <div id="copyright">
@@ -65,32 +63,12 @@
             taulukoiJakeet(luku6);
             
             var current = [0, 0];
-            
             var arvottavat = [];
-            var randomon = true;
             
             $(document).ready(function(){
                     
                     var luku = current[0] + 1;
                     var jae = current[1] + 1;
-                    $('#arvottu').html("LUVUN " + luku + " JAE " + jae);    
-                    
-                    $('#luku').html("");
-                    for(var i=0; i<jaetaulu.length; i++) {
-                        var uusiOption = document.createElement("option");
-                        uusiOption.value = i;
-                        var teksti = document.createTextNode(i+1);
-                        uusiOption.appendChild(teksti);
-                        $('#luku').append(uusiOption);
-                    }
-                    $('#jae').html("");
-                    for(var i=0; i<jaetaulu[0].length; i++) {
-                        uusiOption = document.createElement("option");
-                        uusiOption.value = i;
-                        teksti = document.createTextNode(i+1);
-                        uusiOption.appendChild(teksti);
-                        $('#jae').append(uusiOption);
-                    }
                     
                     for(var i=jaetaulu.length; i>0; i--) {
                         var uusiCheck = document.createElement("input");
@@ -102,51 +80,12 @@
                         $(teksti).insertAfter('#randomlabel');
                         $(uusiCheck).insertAfter('#randomlabel');
                     }
-                    //$('input[name=luku]').prop("disabled", true);
-                    $('#luku').prop("disabled", true);
-                    $('#jae').prop("disabled", true);
-                    
-                    $('#luku').on("change", function(){
-                        var luku = $('#luku').val();
-                        $('#jae').html("");
-                        for(var i=0; i<jaetaulu[luku].length; i++) {
-                            uusiOption = document.createElement("option");
-                            uusiOption.value = i;
-                            teksti = document.createTextNode(i+1);
-                            uusiOption.appendChild(teksti);
-                            $('#jae').append(uusiOption);
-                        }
-                    });
-                    
-                    
-                    $('#ordered').click(function(){
-                        randomon = false;
-                        $('input[name=luku]').prop("disabled", true);
-                        $('#luku').prop("disabled", false);
-                        $('#jae').prop("disabled", false);
-                    });
-                    
-                    $('#random').click(function(){
-                        randomon = true;
-                        $('#luku').prop("disabled", true);
-                        $('#jae').prop("disabled", true);
-                        $('input[name=luku]').prop("disabled", false);
-                    });
-                    
                     
                     $('#syote').keypress(function(e){
                         if(e.which == 13){
                             e.preventDefault();
                             tarkistaJae();
-                            $('#vihje').css("backgroundColor", "#ff6f00");
-                            $('#vihje').css("color", "#ffffff");
                         }
-                    });
-                    
-                    $('#vihje').click(function(){
-                        $('#vihje').css("backgroundColor", "#ffffff");
-                        $('#vihje').css("color", "#ff6f00");
-                        annaVihje();
                     });
                     
                     $('#asetusnappi').click(function(){
@@ -168,38 +107,24 @@
             });
             
             function aloitaPeli() {
-                $('#vihje').css("backgroundColor", "#ff6f00");
-                $('#vihje').css("color", "#ffffff");
                 $('#syote').val("");
                 
-                if(randomon) {
-                    arvottavat = [];
-                    
-                    $('input[name="luku"]:checked').each(function() {
-                           arvottavat.push(this.value);
-                    });
-                    if(typeof arvottavat[0] == "undefined") {
-                        $('#huom').show(400);
-                    }
-                    else {
-                        hideSettings();
-                        arvoJae();
-                    }
+                arvottavat = [];
+                
+                $('input[name="luku"]:checked').each(function() {
+                       arvottavat.push(this.value);
+                });
+                if(typeof arvottavat[0] == "undefined") {
+                    $('#huom').show(400);
                 }
                 else {
-                    current[0] = parseInt($('#luku').val());
-                    current[1] = parseInt($('#jae').val());
-                    
-                    var luku = current[0] + 1;
-                    var jae = current[1] + 1;
-                    $('#arvottu').html("LUVUN " + luku + " JAE " + jae);
-                    
                     hideSettings();
+                    arvoJae();
                 }
             }
             
             function hideSettings() {
-               var display = $('#asetukset').css("display");
+            	var display = $('#asetukset').css("display");
             	if(display != "none") {
 		            $('#huom').hide(400);
 		            $('#asetusnappi').css("backgroundColor", "#ff6f00");
@@ -212,74 +137,46 @@
 
             function tarkistaJae() {
                 var syote = $('#syote').val();
-                syote = syote.trim();
+                
+                var luku = parseInt(syote.substring(0,1));
+                var jae = parseInt(syote.substring(1));
+                var vastaus = [luku, jae];
 
                 if(syote != "") {
-                    if(syote == jaetaulu[current[0]][current[1]]) {
+                    if(vastaus[0]-1 == current[0] && vastaus[1]-1 == current[1]) {
                         palaute("");
                     }
                     else {
-                        palaute(syote);
+                        palaute(vastaus);
                     }
                     $('#syote').val("");
                     
-                    if(randomon)
-                        arvoJae();
-                    else
-                        seuraavaJae();
+                    arvoJae();
                 }
-            }
-            
-            function seuraavaJae() {
-                current[1] += 1;
-                
-                if(current[1] > jaetaulu[current[0]].length-1) {
-                    current[0] += 1;
-                    current[1] = 0;
-                    if(current[0] > jaetaulu.length-1)
-                        current[0] = 0;
-                }
-                
-                var luku = current[0] + 1;
-                var jae = current[1] + 1;
-                
-                $('#arvottu').html("LUVUN " + luku + " JAE " + jae);
             }
             
             function arvoJae() {
                 var arvottu = [];
                 
-                var luvut = arvottavat.length-1;
-                var indeksi = Math.floor(Math.random() * (luvut - 0 + 1)) + 0;
+                var luvut = arvottavat.length;
+                var indeksi = Math.floor(Math.random() * luvut);
                 arvottu[0] = parseInt(arvottavat[indeksi]);
-                var jakeet = jaetaulu[arvottu[0]].length-1;
-                arvottu[1] = Math.floor(Math.random() * (jakeet - 0 + 1)) + 0;
+                var jakeet = jaetaulu[arvottu[0]].length;
+                arvottu[1] = Math.floor(Math.random() * jakeet);
 
-                var luku = arvottu[0] + 1;
-                var jae = arvottu[1] + 1;
-
-                $('#arvottu').html("LUVUN " + luku + " JAE " + jae);
+                $('#jae').html(jaetaulu[arvottu[0]][arvottu[1]]);
                 
                 current = arvottu;
             }
 
-            function palaute(syote) {
-                var luku = current[0] + 1;
-                var jae = current[1] + 1;
-                
+            function palaute(vastaus) {
                 var uusiDiv = document.createElement("div");
                 uusiDiv.className = "palaute";
                 uusiDiv.style.cssText = "display:none;";
                 
                 var sisaDiv = document.createElement("div");
-                sisaDiv.className = "vasenpalsta";
-                var kohta = document.createTextNode("LUKU " + luku + " JAE " + jae);
-                sisaDiv.appendChild(kohta);
-                uusiDiv.appendChild(sisaDiv);
-                
-                sisaDiv = document.createElement("div");
-                sisaDiv.className = "oikeapalsta";
-                if(syote == "") {
+                sisaDiv.className = "tulos";
+                if(vastaus == "") {
                     var tulos = document.createTextNode("Oikein!");
                     sisaDiv.appendChild(tulos);
                     uusiDiv.appendChild(sisaDiv);
@@ -291,30 +188,42 @@
                     
                     
                     sisaDiv = document.createElement("div");
-                    sisaDiv.className = "vasenjae";
-                    
+                    sisaDiv.className = "kysyttyjae";
                     var otsikko = document.createElement("div");
                     otsikko.className = "otsikko";
-                    var oteksti = document.createTextNode("Vastauksesi:");
+                    var oteksti = document.createTextNode("Kysytty jae:");
                     otsikko.appendChild(oteksti);
                     sisaDiv.appendChild(otsikko);
-                    
-                    var syotetty = document.createTextNode(syote);
-                    sisaDiv.appendChild(syotetty);
+                    var kysytty = document.createTextNode(jaetaulu[current[0]][current[1]]);
+                    sisaDiv.appendChild(kysytty);
                     uusiDiv.appendChild(sisaDiv);
                     
                     
                     sisaDiv = document.createElement("div");
-                    sisaDiv.className = "oikeajae";
+                    sisaDiv.className = "syotejavastaus";
+                    
+                    otsikko = document.createElement("div");
+                    otsikko.className = "otsikko";
+                    oteksti = document.createTextNode("Vastauksesi:");
+                    otsikko.appendChild(oteksti);
+                    sisaDiv.appendChild(otsikko);
+                    var lukujajae = document.createElement("div");
+                    lukujajae.className = "lukujajae";
+                    var vastaus = document.createTextNode("Luku " + vastaus[0] + " jae " + vastaus[1]);
+                    lukujajae.appendChild(vastaus);
+                    sisaDiv.appendChild(lukujajae);
+                    uusiDiv.appendChild(sisaDiv);
                     
                     otsikko = document.createElement("div");
                     otsikko.className = "otsikko";
                     oteksti = document.createTextNode("Oikea vastaus:");
                     otsikko.appendChild(oteksti);
                     sisaDiv.appendChild(otsikko);
-                    
-                    var oikeajae = document.createTextNode(jaetaulu[current[0]][current[1]]);
-                    sisaDiv.appendChild(oikeajae);
+                    var lukujajae = document.createElement("div");
+                    lukujajae.className = "lukujajae";
+                    vastaus = document.createTextNode("Luku " + (current[0] + 1) + " jae " + (current[1] + 1));
+                    lukujajae.appendChild(vastaus);
+                    sisaDiv.appendChild(lukujajae);
                     uusiDiv.appendChild(sisaDiv);
                 }
                 
@@ -323,12 +232,6 @@
                     $(uusiDiv).appendTo("#sisalto").show(400);
                 else
                     $(uusiDiv).insertBefore(currentDiv[0]).show(400);
-            }
-            
-            function annaVihje() {
-                var jae = jaetaulu[current[0]][current[1]];
-                var ekasana = jae.substring(0, jae.indexOf(" "));
-                $('#syote').val(ekasana);;
             }
 
             function taulukoiJakeet(luku) {

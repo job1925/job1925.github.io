@@ -2,10 +2,14 @@ body {
     background-color: #263238;
     color: #ffffff;
 }
+h1 a {
+    color: #ffffff;
+    text-decoration: none;
+}
 #sisalto {
     font-family: 'Uncial Antiqua';
     width: 400px;
-    margin: 10px auto 10px auto;
+    margin: 0px auto;
     text-align: center;
     overflow: auto;
 }
@@ -13,7 +17,7 @@ body {
     font-family: 'Ubuntu';
     font-size: 0.85em;
     width: 400px;
-    margin: 10px auto 10px auto;
+    margin: 0px auto 10px auto;
     border-top: 1px solid white;
     padding-top: 15px;
     text-align: center;
@@ -26,6 +30,12 @@ body {
     overflow: hidden;
     margin-bottom: 5px;
     font-size: 18px;
+}
+#ylapalkkivasen {
+    width: 50%;
+    float: left;
+    text-align: left;
+    padding-left: 15px;
 }
 #ypalkkioikea {
     width: 35%;
@@ -70,16 +80,18 @@ body {
 #jae_arvaus {
     padding: 5px;
     overflow: hidden;
-    margin-bottom: 5px;
+    margin: 15px 0px;
 }
 #jae {
-    width: 50%;
+    width: 70%;
     float: left;
     text-align: left;
     padding-left: 15px;
+    font-family: 'Ubuntu';
+    font-size: 0.85em;
 }
 #arvaus {
-    width: 35%;
+    width: 15%;
     float: right;
     text-align: right;
     padding-right: 15px;
@@ -95,35 +107,27 @@ body {
     border-top: 1px solid white;
     overflow: auto;
 }
-.vasenpalsta {
-    width: 50%;
-    float: left;
-    text-align: left;
+.tulos {
+    width: 100%;
+    text-align: center;
 }
-.oikeapalsta {
-    width: 50%;
-    float: left;
-    text-align: right;
-}
-.vasenjae {
+.kysyttyjae {
     width: 49%;
     float: left;
     text-align: left;
     font-family: 'Ubuntu';
     font-size: 0.85em;
-    margin-top: 5px;
 }
-.oikeajae {
+.syotejavastaus {
     width: 49%;
     float: right;
-    text-align: left;
+    text-align: right;
     font-family: 'Ubuntu';
     font-size: 0.85em;
-    margin-top: 5px;
 }
 .otsikko {
     width: 100%;
-    text-align: left;
     font-family: 'Ubuntu';
     font-weight: bold;
+    margin-top: 10px;
 }
