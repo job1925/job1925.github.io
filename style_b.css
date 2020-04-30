@@ -71,6 +71,10 @@ h1 a {
 .valinnat {
     margin: 15px auto;
 }
+#moodi-info {
+    font-family: 'Ubuntu';
+    color: #263238;
+}
 #huom {
     font-family: 'Ubuntu';
     color: #263238;
